@@ -3,9 +3,11 @@ FROM php:7-fpm
 RUN apt-get update && apt-get -y install \
         git g++ libcurl4-gnutls-dev libicu-dev libmcrypt-dev libpq-dev libxml2-dev unzip zlib1g-dev \
     && git clone -b develop https://github.com/phpredis/phpredis.git /usr/src/php/ext/redis \
-    && docker-php-ext-install curl intl json mbstring mcrypt pdo pdo_pgsql redis xml \
+    && docker-php-ext-install curl intl json mbstring pdo pdo_pgsql redis xml \
     && apt-get autoremove && apt-get autoclean \
     && rm -rf /var/lib/apt/lists/*
+
+RUN pecl install mcrypt-1.0.1 && docker-php-ext-enable mcrypt
 
 RUN echo 'date.timezone="Europe/Madrid"' >>  /usr/local/etc/php/conf.d/date.ini
 RUN echo 'session.save_path = "/tmp"' >>  /usr/local/etc/php/conf.d/session.ini
