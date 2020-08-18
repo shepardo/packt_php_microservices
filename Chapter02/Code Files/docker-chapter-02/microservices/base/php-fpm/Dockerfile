@@ -7,7 +7,7 @@ RUN apt-get update && apt-get -y install \
     && apt-get -y autoremove && apt-get -y autoclean \
     && rm -rf /var/lib/apt/lists/*
 
-RUN pecl install mcrypt-1.0.1 && docker-php-ext-enable mcrypt
+RUN echo '' | pecl install mcrypt-1.0.3 && docker-php-ext-enable mcrypt
 
 RUN echo 'date.timezone="Europe/Madrid"' >>  /usr/local/etc/php/conf.d/date.ini
 RUN echo 'session.save_path = "/tmp"' >>  /usr/local/etc/php/conf.d/session.ini
