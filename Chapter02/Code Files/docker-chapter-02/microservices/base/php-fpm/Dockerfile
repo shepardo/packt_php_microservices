@@ -4,7 +4,7 @@ RUN apt-get update && apt-get -y install \
         git g++ libcurl4-gnutls-dev libicu-dev libmcrypt-dev libpq-dev libxml2-dev unzip zlib1g-dev \
     && git clone -b develop https://github.com/phpredis/phpredis.git /usr/src/php/ext/redis \
     && docker-php-ext-install curl intl json pdo pdo_pgsql redis xml \
-    && apt-get autoremove && apt-get autoclean \
+    && apt-get -y autoremove && apt-get -y autoclean \
     && rm -rf /var/lib/apt/lists/*
 
 RUN pecl install mcrypt-1.0.1 && docker-php-ext-enable mcrypt
